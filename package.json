@@ -1,0 +1,26 @@
+{
+    "name": "streamer-backend-app",
+    "version": "1.0.0",
+    "description": "Backend for streamer app",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "format:check": "prettier --check .",
+        "format:write": "prettier --write .",
+        "lint:check": "eslint .",
+        "lint:fix": "eslint --fix ."
+    },
+    "author": "Ushakova Mariia",
+    "license": "ISC",
+    "devDependencies": {
+        "eslint": "^8.43.0",
+        "eslint-config-prettier": "^8.8.0",
+        "nodemon": "^2.0.22",
+        "prettier": "^2.8.8"
+    },
+    "dependencies": {
+        "express": "^4.18.2",
+        "mongoose": "^7.3.1"
+    }
+}
