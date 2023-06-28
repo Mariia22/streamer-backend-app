@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import 'dotenv/config';
 import {
     formBodyValidation,
+    updateVoteBodyValidation,
     handleValidationErrors,
 } from './validation/index.js';
 import { StreamerController } from './controllers/index.js';
@@ -25,7 +26,7 @@ app.get('/streamers', StreamerController.getAllStreamers);
 app.get('/streamer/:streamerId', StreamerController.getStreamerById);
 app.put(
     '/streamers/:streamerId/vote',
-    formBodyValidation,
+    updateVoteBodyValidation,
     handleValidationErrors,
     StreamerController.updateStreamer
 );

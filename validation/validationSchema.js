@@ -11,3 +11,7 @@ export const formBodyValidation = [
         .isLength({ min: 5 })
         .isString(),
 ];
+
+export const updateVoteBodyValidation = [
+    body('vote', 'Vote should be +1 or -1').matches('^(1|-1)$'),
+];

@@ -52,7 +52,28 @@ export const getStreamerById = async (req, res) => {
 
 export const updateStreamer = async (req, res) => {
     try {
-        res.status(200).json({ newStreamer });
+        const streamerId = req.params.streamerId;
+        const currentStreamer = await streamerModel.findOne({
+            _id: streamerId,
+        });
+        if (!currentStreamer) {
+            return res.status(404).json({
+                message: `Streamer with id ${streamerId} is not found`,
+            });
+        }
+        const update = {
+            name: currentStreamer.name,
+            platform: currentStreamer.platform,
+            description: currentStreamer.description,
+            vote: currentStreamer.vote + req.body.vote,
+            avatarUrl: currentStreamer.avatarUrl,
+        };
+        const updateStreamer = await streamerModel.findByIdAndUpdate(
+            streamerId,
+            update,
+            { returnDocument: 'after' }
+        );
+        res.json({ updateStreamer });
     } catch (error) {
         res.status(500).json({
             message: 'Server Error. Failed to change the streamer',
