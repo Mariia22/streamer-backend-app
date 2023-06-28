@@ -1,8 +1,11 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import 'dotenv/config';
-import { formBodyValidation, handleValidationErrors } from './validation';
-import { StreamerController } from './controllers';
+import {
+    formBodyValidation,
+    handleValidationErrors,
+} from './validation/index.js';
+import { StreamerController } from './controllers/index.js';
 
 mongoose
     .connect(process.env.DB)

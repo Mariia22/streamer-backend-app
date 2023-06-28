@@ -5,11 +5,14 @@
     "main": "index.js",
     "type": "module",
     "scripts": {
+        "start": "node index.js",
+        "start:dev": "nodemon index.js",
         "test": "echo \"Error: no test specified\" && exit 1",
         "format:check": "prettier --check .",
         "format:write": "prettier --write .",
         "lint:check": "eslint .",
-        "lint:fix": "eslint --fix ."
+        "lint:fix": "eslint --fix .",
+        "prepare": "npm run format:write && npm run lint:fix"
     },
     "author": "Ushakova Mariia",
     "license": "ISC",

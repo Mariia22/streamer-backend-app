@@ -15,7 +15,7 @@ const StreamerSchema = new mongoose.Schema(
             required: true,
         },
         avatarUrl: String,
-        vote: Number
+        vote: Number,
     },
     {
         timestamps: true,
