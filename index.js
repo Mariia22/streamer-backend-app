@@ -34,6 +34,4 @@ app.listen(process.env.PORT, (error) => {
     if (error) {
         return console.log(error);
     }
-
-    console.log('Server OK');
 });

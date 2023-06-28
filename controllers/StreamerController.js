@@ -1,3 +1,4 @@
+import { imageURL } from '../const/index.js';
 import streamerModel from '../models/Streamer.js';
 
 export const registerStreamer = async (req, res) => {
@@ -7,7 +8,7 @@ export const registerStreamer = async (req, res) => {
             platform: req.body.platform,
             description: req.body.description,
             vote: 0,
-            image: 'https://static-cdn.jtvnw.net/jtv_user_pictures/asmongold-profile_image-f7ddcbd0332f5d28-300x300.png',
+            avatarUrl: imageURL,
         });
         await newStreamer.save();
         res.status(201).json({ newStreamer });
@@ -20,15 +21,41 @@ export const registerStreamer = async (req, res) => {
 
 export const getAllStreamers = async (req, res) => {
     try {
-    } catch (error) {}
+        const streamers = await streamerModel.find();
+        res.status(200).json(streamers);
+    } catch (error) {
+        res.status(500).json({
+            message: 'Server Error. Failed to get streamers',
+        });
+    }
 };
 
 export const getStreamerById = async (req, res) => {
     try {
-    } catch (error) {}
+        const streamerId = req.params.streamerId;
+
+        const streamer = await streamerModel
+            .findOne({ _id: streamerId })
+            .exec();
+        if (!streamer) {
+            return res.status(404).json({
+                message: `Streamer with id ${streamerId} is not found`,
+            });
+        }
+        res.status(200).json(streamer);
+    } catch (error) {
+        res.status(500).json({
+            message: 'Server Error. Failed to get streamer',
+        });
+    }
 };
 
 export const updateStreamer = async (req, res) => {
     try {
-    } catch (error) {}
+        res.status(200).json({ newStreamer });
+    } catch (error) {
+        res.status(500).json({
+            message: 'Server Error. Failed to change the streamer',
+        });
+    }
 };
