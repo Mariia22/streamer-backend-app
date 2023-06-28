@@ -4,7 +4,7 @@ import 'dotenv/config';
 
 mongoose.connect(process.env.DB)
 .then(()=> console.log("Connection to DB is succeed"))
-.catch((error)=> console.log("DB error",error))
+.catch((error)=> console.log("DB error", error))
 
 const app = express();
 
