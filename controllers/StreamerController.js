@@ -1,4 +1,5 @@
 import { imageURL } from '../const/index.js';
+import { io } from '../index.js';
 import streamerModel from '../models/Streamer.js';
 
 export const registerStreamer = async (req, res) => {
@@ -11,6 +12,7 @@ export const registerStreamer = async (req, res) => {
             avatarUrl: imageURL,
         });
         await newStreamer.save();
+        io.emit('new-streamer', { newStreamer });
         res.status(201).json({ newStreamer });
     } catch (error) {
         res.status(500).json({
@@ -73,6 +75,7 @@ export const updateStreamer = async (req, res) => {
             update,
             { returnDocument: 'after' }
         );
+        io.emit('update-streamer', { updateStreamer });
         res.json({ updateStreamer });
     } catch (error) {
         res.status(500).json({

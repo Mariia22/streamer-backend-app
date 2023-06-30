@@ -1,5 +1,6 @@
 import express from 'express';
-import mongoose from 'mongoose';
+import http from 'http';
+import { Server } from 'socket.io';
 import 'dotenv/config';
 import {
     formBodyValidation,
@@ -7,14 +8,24 @@ import {
     handleValidationErrors,
 } from './validation/index.js';
 import { StreamerController } from './controllers/index.js';
-
-mongoose
-    .connect(process.env.DB)
-    .then(() => console.log('Connection to DB is succeed'))
-    .catch((error) => console.log('DB error', error));
+import connectDB from './db/connection.js';
 
 const app = express();
+const server = http.createServer(app);
+export const io = new Server(server, {
+    cors: {
+        origin: [process.env.FRONTEND_APP],
+    },
+});
+
 app.use(express.json());
+connectDB();
+io.on('connect', (socket) => {
+    console.log(`user connected`);
+    socket.on('disconnect', () => {
+        console.log(`user disconnected`);
+    });
+});
 
 app.post(
     '/streamers',
@@ -30,7 +41,6 @@ app.put(
     handleValidationErrors,
     StreamerController.updateStreamer
 );
-
 app.listen(process.env.PORT, (error) => {
     if (error) {
         return console.log(error);
