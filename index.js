@@ -1,5 +1,6 @@
 import express from 'express';
 import http from 'http';
+import cors from 'cors';
 import { Server } from 'socket.io';
 import 'dotenv/config';
 import {
@@ -19,6 +20,7 @@ export const io = new Server(server, {
 });
 
 app.use(express.json());
+app.use(cors());
 connectDB();
 io.on('connect', (socket) => {
     console.log(`user connected`);
@@ -41,7 +43,7 @@ app.put(
     handleValidationErrors,
     StreamerController.updateStreamer
 );
-app.listen(process.env.PORT, (error) => {
+server.listen(process.env.PORT, (error) => {
     if (error) {
         return console.log(error);
     }
