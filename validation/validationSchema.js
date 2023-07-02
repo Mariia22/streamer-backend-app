@@ -7,8 +7,8 @@ export const formBodyValidation = [
     body('platform', 'Platform should be selected')
         .isLength({ min: 1 })
         .isString(),
-    body('description', 'Description should be at least 5 chars')
-        .isLength({ min: 5 })
+    body('description', 'Description should be at least 8 chars')
+        .isLength({ min: 8 })
         .isString(),
 ];
 
