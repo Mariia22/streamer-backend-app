@@ -23,10 +23,7 @@ app.use(express.json());
 app.use(cors());
 connectDB();
 io.on('connect', (socket) => {
-    console.log(`user connected`);
-    socket.on('disconnect', () => {
-        console.log(`user disconnected`);
-    });
+    socket.on('disconnect', () => {});
 });
 
 app.post(
@@ -43,8 +40,4 @@ app.put(
     handleValidationErrors,
     StreamerController.updateStreamer
 );
-server.listen(process.env.PORT, (error) => {
-    if (error) {
-        return console.log(error);
-    }
-});
+server.listen(process.env.PORT);
