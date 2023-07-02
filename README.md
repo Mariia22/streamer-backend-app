@@ -10,7 +10,7 @@ Common setup:
 ```
 2. Install the dependencies
 ```bash
-   npm run start:dev
+   npm install
 ```
 3. Add environment variables
   - DB="path to MongoDB cluster" (example: mongodb+srv://NAME:PASSWORD@cluster0.i8ydhqv.mongodb.net/streamers?retryWrites=true&w=majority)
